@@ -53,13 +53,16 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "• ⏰ Напиши время завтрака — я рассчитаю тайминг обеда, ужина и снэка.\n"
         "• 🍳 /cook — быстрый ужин из остатков в холодильнике.\n"
         "• 📊 /today — подвести итоги дня."
-    )
-
 async def today_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     chat = get_user_chat(user_id)
-    await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
-        try:
+
+    await context.bot.send_chat_action(
+        chat_id=update.effective_chat.id,
+        action="typing"
+    )
+
+    try:
         response = chat.send_message(
             "Сделай мне вечерний чек-аут и подведи итоги "
             "сегодняшнего дня по калориям, белку, клетчатке, "
@@ -70,9 +73,8 @@ async def today_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception:
         logging.exception("Ошибка при создании сводки")
         await update.message.reply_text(
-            "Не удалось собрать сводку. Проверь логи."
+            "Не удалось собрать сводку. Проверь логи Render."
         )
-
 async def cook_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     chat = get_user_chat(user_id)
