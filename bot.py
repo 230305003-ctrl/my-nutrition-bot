@@ -174,4 +174,5 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.add_handler(MessageHandler(filters.VOICE, handle_voice))
     
-    app.run_polling()
+    threading.Thread(target=run_web, daemon=True).start()
+app.run_polling()
