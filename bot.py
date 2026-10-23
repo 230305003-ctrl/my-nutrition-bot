@@ -61,9 +61,11 @@ async def today_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
     try:
         response = chat.send_message("Сделай мне вечерний чек-аут и подведи итоги сегодняшнего дня по калориям, белку, клетчатке, воде и динамике веса.")
-        await update.message.reply_text(response.text)
-    except Exception:
-        await update.message.reply_text("Не удалось собрать сводку, попробуй еще раз!")
+        except Exception:
+    logging.exception("Ошибка при обработке текста")
+    await update.message.reply_text(
+        "Не удалось получить ответ от ИИ. Проверь логи."
+    )
 
 async def cook_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
