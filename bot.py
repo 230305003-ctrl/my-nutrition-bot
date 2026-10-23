@@ -53,6 +53,9 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "• ⏰ Напиши время завтрака — я рассчитаю тайминг обеда, ужина и снэка.\n"
         "• 🍳 /cook — быстрый ужин из остатков в холодильнике.\n"
         "• 📊 /today — подвести итоги дня."
+    )
+
+
 async def today_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     chat = get_user_chat(user_id)
