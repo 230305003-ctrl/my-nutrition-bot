@@ -10,6 +10,15 @@ TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 GEMINI_KEY = os.environ.get("GEMINI_KEY")
 
 ai_client = genai.Client(api_key=GEMINI_KEY)
+web_app = Flask(__name__)
+
+@web_app.route("/")
+def home():
+    return "Nutrition bot is running!", 200
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    web_app.run(host="0.0.0.0", port=port)
 
 SYSTEM_INSTRUCTION = """
 Ты — заботливый, дружелюбный и понимающий ИИ-нутрициолог. Твоя подопечная — студентка (19 лет, стартовый вес 95 кг), которая опытно худеет уже более 2 лет.
